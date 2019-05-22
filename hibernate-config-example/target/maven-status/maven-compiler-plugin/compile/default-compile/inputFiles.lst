@@ -1,0 +1,4 @@
+/home/rafamaciel/eclipse-workspace/examples/hibernate-config-example/src/main/java/com/rmaciel/hibernateconfigexample/App.java
+/home/rafamaciel/eclipse-workspace/examples/hibernate-config-example/src/main/java/com/rmaciel/hibernateconfigexample/dao/UserDao.java
+/home/rafamaciel/eclipse-workspace/examples/hibernate-config-example/src/main/java/com/rmaciel/hibernateconfigexample/util/HibernateUtil.java
+/home/rafamaciel/eclipse-workspace/examples/hibernate-config-example/src/main/java/com/rmaciel/hibernateconfigexample/entity/User.java

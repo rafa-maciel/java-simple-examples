@@ -1,0 +1,27 @@
+package com.rmaciel.hibernateconfigexample.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "contact")
+public class Contact {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id") // might be hidden if the column name is the same of the attribute
+	private Integer id;
+	
+	@Embedded
+	private Name name;
+	
+	private String email;
+	
+	
+
+}

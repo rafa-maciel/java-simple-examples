@@ -1,0 +1,5 @@
+package com.rmaciel.hibernatexml.util;
+
+public class HibernateUtil {
+
+}

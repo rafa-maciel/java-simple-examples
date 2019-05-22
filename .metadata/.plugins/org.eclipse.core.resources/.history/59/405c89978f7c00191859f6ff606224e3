@@ -1,0 +1,24 @@
+package com.rmaciel.hibernateconfigexample;
+
+import java.util.List;
+
+import com.rmaciel.hibernateconfigexample.dao.UserDao;
+import com.rmaciel.hibernateconfigexample.entity.User;
+
+public class App {
+	public static void main(String[] args) {
+		UserDao dao = new UserDao();
+		
+		User peter = new User("Peter", "Parker", "iamnot@spider.com");
+		User tony = new User("Tony", "Stark", "iron.man@me.com");
+		User doctor = new User("Doctor", "Strange", "doctor.strange@wizard.com");
+		
+		dao.save(peter);
+		dao.save(tony);
+		dao.save(doctor);
+		
+		List<User> users = dao.listAll();
+		users.forEach(user -> System.out.println(user));
+		
+	}
+}

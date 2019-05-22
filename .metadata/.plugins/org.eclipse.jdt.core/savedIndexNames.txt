@@ -1,0 +1,19 @@
+INDEX VERSION 1.131+/home/rafamaciel/eclipse-workspace/java-simple-examples/.metadata/.plugins/org.eclipse.jdt.core
+1014535483.index
+266138728.index
+3710653997.index
+607642739.index
+4247101667.index
+3094175659.index
+1330278632.index
+868579734.index
+4172260964.index
+3524820185.index
+527409439.index
+2312593677.index
+171807386.index
+1427367803.index
+1508286650.index
+3668204000.index
+3872850325.index
+701439208.index

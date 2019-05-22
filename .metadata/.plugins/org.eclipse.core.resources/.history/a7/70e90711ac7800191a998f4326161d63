@@ -1,0 +1,5 @@
+package com.rmaciel.hibernateconfigexample.util;
+
+public class HibernateUtil {
+
+}

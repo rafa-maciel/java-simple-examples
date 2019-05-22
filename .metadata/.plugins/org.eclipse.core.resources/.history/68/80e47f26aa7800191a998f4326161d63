@@ -1,0 +1,11 @@
+package com.rmaciel.hibernateconfigexample.entity;
+
+import javax.persistence.Embeddable;
+
+@Embeddable
+public class Name {
+	public String first;
+	public String last;
+	public String middle;
+	public String nickname;
+}

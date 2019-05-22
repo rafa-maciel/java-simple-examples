@@ -1,0 +1,130 @@
+package app;
+
+import app.Roteador;
+import app.Terminal;
+
+public class NetMap {
+	private ListaLinkada<Terminal> terminaisCadastrados;
+	private ListaLinkada<Roteador> roteadoresCadastrados;
+	
+	public NetMap() {
+		terminaisCadastrados = new ListaLinkada<Terminal>();
+		roteadoresCadastrados = new ListaLinkada<Roteador>();
+	}
+	
+	public void cadastrar(Roteador roteador) {
+		this.roteadoresCadastrados.inserir(roteador);
+	}
+	
+	public void cadastrar(Terminal terminal) {
+		this.terminaisCadastrados.inserir(terminal);
+	}
+	
+	public void removerRoteador(Roteador roteador) {
+		this.roteadoresCadastrados.remove(roteador);
+		// pega lista de enlaces de roteadores
+		ListaLinkada<Roteador> conectados = roteador.getRoteadoresConectados();
+		// pega o primeiro no dessa lista
+		No<Roteador> atual = conectados.getPrimeiroNo();
+		
+		while (atual != null) {
+			//Remove referencias dos roteadores conectados de cada objeto do no
+			atual.objeto.getRoteadoresConectados().remove(roteador);
+			atual = atual.proximo;
+		}
+		
+		conectados.limpar();
+	}
+	
+	public void conectar(Terminal terminal, Roteador roteador) {
+		terminal.setRoteador(roteador);
+		roteador.getTerminaisContectados().inserir(terminal);
+	}
+	
+	public void desconectar(Terminal terminal) {
+		Roteador roteador = terminal.getRoteador();
+		roteador.getTerminaisContectados().remove(terminal);
+		terminal.setRoteador(null);
+		
+	}
+	
+	public void removerTerminal(Terminal terminal) {
+		terminal.getRoteador().getTerminaisContectados().remove(terminal);
+		this.terminaisCadastrados.remove(terminal);
+	}
+	
+	public void conectar(Roteador roteador, Roteador outroRoteador) {
+		// Valida se o roteador não está tentando conectar com ele mesmo
+		if (roteador.equals(outroRoteador)) {
+			throw new RuntimeException("O roteador não pode se conectar com ele mesmo");
+		}
+		
+		// Cria o primeiro enlace para o roteador 
+		roteador.getRoteadoresConectados().inserir(outroRoteador);
+		// cria o segundo enlace para o outro roteador
+		outroRoteador.getRoteadoresConectados().inserir(roteador);
+	}
+	
+	public void desconectar(Roteador roteador, Roteador outroRoteador) {
+		roteador.getRoteadoresConectados().remove(outroRoteador);
+		outroRoteador.getRoteadoresConectados().remove(roteador);
+	}
+	
+	public int calculaFrequenciaTerminal(String localizacao) {
+		No<Terminal> atual = this.terminaisCadastrados.getPrimeiroNo();
+		int cont = 0;
+		while (atual  != null ) {
+			if (atual.objeto.getLocalizacao().equals(localizacao)) {
+				cont++;
+			}
+			atual = atual.proximo;
+		}
+		
+		return cont;
+	}
+	
+	public int calculaFrequenciaRoteador(String operadora) {
+		No<Roteador> atual = this.roteadoresCadastrados.getPrimeiroNo();
+		int cont = 0;
+		while (atual  != null ) {
+			if (atual.objeto.getOperadora().equals(operadora)) {
+				cont++;
+			}
+			atual = atual.proximo;
+		}
+		
+		return cont;
+	}
+	
+	public boolean enviaPacoteDados(Terminal terminal1, Terminal terminal2) {
+		if (this.roteadorPossuiTerminal(terminal1.getRoteador(), terminal2)) {
+			return true;
+		}
+		
+		No<Roteador> noRoteadoresConectados = terminal1.getRoteador().getRoteadoresConectados().getPrimeiroNo();
+		while (noRoteadoresConectados != null) {
+			Roteador roteador = noRoteadoresConectados.objeto;
+			if (this.roteadorPossuiTerminal(roteador, terminal2)) {
+				return true;
+			}
+			noRoteadoresConectados = noRoteadoresConectados.proximo;
+		}
+		
+		return false;
+			
+	}
+	
+	private boolean roteadorPossuiTerminal(Roteador roteador, Terminal terminal) {
+		return roteador.getTerminaisContectados().existe(terminal);
+	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	
+	
+}
