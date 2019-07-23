@@ -6,13 +6,15 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.web.client.RestTemplate;
 
 import com.rmaciel.learning.springmvc.ebookstore.controllers.HomeController;
 import com.rmaciel.learning.springmvc.ebookstore.daos.EbookDAO;
+import com.rmaciel.learning.springmvc.ebookstore.infra.FileSaver;
 import com.rmaciel.learning.springmvc.ebookstore.models.Ebook;
 
 @SpringBootApplication
-@ComponentScan(basePackageClasses= {HomeController.class, EbookDAO.class, Ebook.class})
+@ComponentScan(basePackageClasses= {HomeController.class, EbookDAO.class, Ebook.class, FileSaver.class})
 public class EbookStoreApplication {
 
 	public static void main(String[] args) {
@@ -29,5 +31,11 @@ public class EbookStoreApplication {
 		
 		return messageSource;
 	}
+	
+	@Bean
+	public RestTemplate restTemplate() {
+		return new RestTemplate();
+	}
+	
 	
 }

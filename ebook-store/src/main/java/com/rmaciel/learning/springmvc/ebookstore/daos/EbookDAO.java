@@ -26,5 +26,12 @@ public class EbookDAO {
 		TypedQuery<Ebook> query = manager.createQuery("select e from Ebook e", Ebook.class);
 		return query.getResultList();
 	}
+	
+	public Ebook find(Integer id) {
+		TypedQuery<Ebook> query = manager.createQuery("select e from Ebook e join fetch e.prices where e.id = :id", Ebook.class);
+		query.setParameter("id", id);
+		
+		return query.getSingleResult();
+	}
 
 }
